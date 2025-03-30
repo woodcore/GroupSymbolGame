@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>符号图片连连看</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            touch-action: manipulation;
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 100%;
+        }
+        
+        .symbols-area, .images-area {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        
+        .item {
+            border: 2px solid #ccc;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            touch-action: manipulation;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .item img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .item.selected {
+            border-color: #007bff;
+            background-color: #e7f1ff;
+            transform: scale(0.95);
+        }
+
+        .mode-selection {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .mode-selection button {
+            width: 80%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            background: #007bff;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .score, .timer {
+            text-align: center;
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="mode-selection" id="modeSelection">
+        <h2>请选择游戏模式</h2>
+        <button onclick="startGame('normal')">计时模式</button>
+        <button onclick="startGame('countdown')">5分钟挑战</button>
+    </div>
+    <div class="game-area" id="gameArea" style="display: none;">
+        <div class="score">得分：<span id="score">0</span></div>
+        <div class="timer">时间：<span id="timer">00:00</span></div>
+        <div class="game-container">
+            <div class="symbols-area" id="symbolsArea"></div>
+            <div class="images-area" id="imagesArea"></div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
